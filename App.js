@@ -6,6 +6,8 @@ import {
   View,
   FlatList,
   Alert,
+  TouchableWithoutFeedback,
+  Keyboard,
 } from "react-native";
 import Header from "./app/screens/home/header";
 import {
@@ -18,7 +20,7 @@ import AddTodo from "./app/screens/home/AddTodo";
 export default function App() {
   const [todos, setTodos] = useState([
     {
-      text: "Practice React Native",
+      text: "Pra   ctice React Native",
       key: 1,
     },
     {
@@ -47,21 +49,23 @@ export default function App() {
     setTodos((prevtodos) => [{ text, key: Math.random() }, ...prevtodos]);
   };
   return (
-    <View style={styles.container}>
-      <Header />
-      <View style={styles.content}>
-        <AddTodo handleAddtoDo={handleAddtoDo} />
-        <View>
-          <FlatList
-            data={todos}
-            renderItem={({ item }) => (
-              <Todo item={item} handleDeleteToDo={handleDeleteToDo} />
-            )}
-          />
+    <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+      <View style={styles.container}>
+        <Header />
+        <View style={styles.content}>
+          <AddTodo handleAddtoDo={handleAddtoDo} />
+          <View>
+            <FlatList
+              data={todos}
+              renderItem={({ item }) => (
+                <Todo item={item} handleDeleteToDo={handleDeleteToDo} />
+              )}
+            />
+          </View>
         </View>
+        <StatusBar style="auto" />
       </View>
-      <StatusBar style="auto" />
-    </View>
+    </TouchableWithoutFeedback>
   );
 }
 
