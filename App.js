@@ -16,6 +16,7 @@ import {
 } from "react-native-responsive-screen";
 import Todo from "./app/screens/home/Todo";
 import AddTodo from "./app/screens/home/AddTodo";
+import FlexPractice from "./app/screens/flexbox/flex";
 
 export default function App() {
   const [todos, setTodos] = useState([
@@ -49,14 +50,16 @@ export default function App() {
     setTodos((prevtodos) => [{ text, key: Math.random() }, ...prevtodos]);
   };
   return (
+    // <FlexPractice />
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
       <View style={styles.container}>
         <Header />
         <View style={styles.content}>
           <AddTodo handleAddtoDo={handleAddtoDo} />
-          <View>
+          <View style={styles.list}>
             <FlatList
               data={todos}
+              // scrollEnabled={true}
               renderItem={({ item }) => (
                 <Todo item={item} handleDeleteToDo={handleDeleteToDo} />
               )}
@@ -71,11 +74,15 @@ export default function App() {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     backgroundColor: "#fff",
+    flex: 1,
   },
   content: {
     marginTop: hp("10%"),
-    paddingHorizontal: 6,
+    paddingHorizontal: 20,
+    flex: 1,
+  },
+  list: {
+    flex: 1,
   },
 });
