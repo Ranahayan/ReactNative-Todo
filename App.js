@@ -1,5 +1,12 @@
 import { useState } from "react";
-import { StyleSheet, Text, StatusBar, View, FlatList } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  StatusBar,
+  View,
+  FlatList,
+  Alert,
+} from "react-native";
 import Header from "./app/screens/home/header";
 import {
   widthPercentageToDP as wp,
@@ -33,6 +40,10 @@ export default function App() {
   };
   const handleAddtoDo = (text) => {
     if (!text) return;
+    if (text.length < 3)
+      return Alert.alert("Title", "Todos must be three chracter long", [
+        { text: "Understood", onPress: () => console.log("understood") },
+      ]);
     setTodos((prevtodos) => [{ text, key: Math.random() }, ...prevtodos]);
   };
   return (
